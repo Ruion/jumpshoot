@@ -2,7 +2,7 @@
 
 header('Content-type: text/javascript');
 $json = array(
-		'wresult' => 'fail',
+		'result' => 'fail',
 );
 
 if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["phone"]) && isset($_POST["score"]) && isset($_POST["register_datetime"]))
@@ -15,22 +15,23 @@ if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["phone"]) &&
     $score = mysqli_real_escape_string($con, $_POST["score"]);
     $register_datetime = mysqli_real_escape_string($con, $_POST["register_datetime"]);
 
-    $sql = mysqli_query($con, "INSERT INTO registration (name, phone, email, score, register_datetime) VALUES ('$name', '$email', '$phone', '$score', '$register_datetime')");
+    $sql = mysqli_query($con, "INSERT INTO registration (name, phone, email, score, register_datetime) 
+    VALUES ('$name', '$phone', '$email', '$score', '$register_datetime')");
 
     if ($sql)
     {
-        $json['wresult'] = 'success';
+        $json['result'] = 'success';
     }
     else
     {
-        $json['wresult'] = 'fail';
+        $json['result'] = 'fail';
     }
 
     echo json_encode($json);
 }
 else
 {
-    $json['wresult'] = 'fail';
+    $json['result'] = 'fail';
     echo json_encode($json);
 }
 
